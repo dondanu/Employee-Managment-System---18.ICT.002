@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFEB3B">
+
+    <!-- Leave ListView to display leaves -->
+    <ListView
+        android:id="@+id/leaveListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Back to LeaveActivity button -->
+    <Button
+        android:id="@+id/btnBackToLeave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back to Leave Activity"
+        android:background="#F44336"
+        android:textColor="#FFFFFF" />
+</LinearLayout>

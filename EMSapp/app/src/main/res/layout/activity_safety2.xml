@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#F3F3F3">
+
+    <!-- Title of the activity -->
+    <TextView
+        android:id="@+id/title_safety2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Incident List"
+        android:textSize="20sp"
+        android:textColor="#FF5722"
+        android:gravity="center"
+        android:padding="16dp"
+        android:background="#FFFFFF"
+        android:textStyle="bold" />
+
+    <!-- ListView to display incidents -->
+
+    <!-- Back Button -->
+    <ListView
+        android:id="@+id/incident_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#FFFFFF"
+        android:divider="#E0E0E0"
+        android:dividerHeight="1dp" />
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:backgroundTint="#208019"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:layout_marginTop="16dp"
+        android:padding="12dp" />
+</LinearLayout>

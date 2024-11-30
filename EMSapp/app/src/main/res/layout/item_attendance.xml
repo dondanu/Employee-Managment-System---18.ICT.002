@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#ffffff"
+    android:layout_marginBottom="10dp"
+    android:shadowColor="#000000"
+    android:shadowDx="0">
+
+    <!-- Employee ID -->
+    <TextView
+        android:id="@+id/empID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Employee ID: 12345"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:paddingBottom="8dp"/>
+
+    <!-- Date -->
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date: 2024-11-01"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:paddingBottom="8dp"/>
+
+    <!-- Check In -->
+    <TextView
+        android:id="@+id/txtCheckIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check In: 9:00 AM"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:paddingBottom="8dp"/>
+
+    <!-- Check Out -->
+    <TextView
+        android:id="@+id/txtCheckOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check Out: 6:00 PM"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:paddingBottom="8dp"/>
+
+    <!-- Status -->
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Status: Present"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:paddingBottom="8dp"/>
+
+    <!-- Delete Button -->
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:textColor="#ffffff"
+        android:background="#FF5722"
+        android:layout_gravity="center"/>
+</LinearLayout>

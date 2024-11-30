@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#F5F5F5">
+
+    <!-- Employee ID -->
+    <EditText
+        android:id="@+id/etEmployeeID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Employee ID"
+        android:textColor="#000000"
+        android:textColorHint="#757575"
+        android:padding="12dp"
+        android:background="#FFFFFF"
+        android:layout_marginBottom="8dp"
+        android:focusable="false"
+        android:cursorVisible="false"/>
+
+    <!-- Name -->
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:textColor="#000000"
+        android:padding="12dp"
+        android:background="#FFFFFF"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Designation -->
+    <EditText
+        android:id="@+id/etDesignation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Designation"
+        android:textColor="#000000"
+        android:padding="12dp"
+        android:background="#FFFFFF"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Department -->
+    <EditText
+        android:id="@+id/etDepartment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Department"
+        android:textColor="#000000"
+        android:padding="12dp"
+        android:background="#FFFFFF"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Joining Date -->
+    <EditText
+        android:id="@+id/etJoiningDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Joining Date"
+        android:textColor="#000000"
+        android:padding="12dp"
+        android:background="#FFFFFF"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Email -->
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:textColor="#000000"
+        android:padding="12dp"
+        android:background="#FFFFFF"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Update Button -->
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:backgroundTint="#0288D1"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Back to Home Button -->
+    <Button
+        android:id="@+id/btnBackToHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back to Home"
+        android:backgroundTint="#FF4081"
+        android:textColor="#FFFFFF" />
+</LinearLayout>

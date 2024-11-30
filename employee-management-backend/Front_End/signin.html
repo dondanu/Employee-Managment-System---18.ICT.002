@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management System - Sign In</title>
+    <style>
+        /* General Page Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-image: url('../img/e4.gif');
+        }
+
+        /* Centered Container */
+        .container {
+            width: 400px;
+            margin: 100px auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        /* Page Header */
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #ffcc00;
+        }
+
+        /* Input Styles */
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+        }
+
+        /* Button Styles */
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        button#login {
+            background-color: #28a745;
+            color: #ffffff;
+        }
+
+        button#signup {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        /* 3D Flip Animation for Reset Button */
+        .flip-container {
+            perspective: 1000px;
+            width: 100%;
+            height: 50px;
+        }
+
+        .flip {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .flip:hover {
+            transform: rotateY(180deg);
+        }
+
+        .flip .front, .flip .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .flip .back {
+            transform: rotateY(180deg);
+            background-color: #ff6347;
+            color: white;
+        }
+
+        .flip .front {
+            background-color: #ff6347;
+            color: white;
+        }
+
+        /* Reset Button Styles */
+        button#reset {
+            background-color: transparent;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        /* Toast Notification */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            margin: auto;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            padding: 10px;
+            position: fixed;
+            z-index: 1;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 17px;
+        }
+
+        #toast.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @keyframes fadein {
+            from {
+                bottom: 0;
+                opacity: 0;
+            }
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeout {
+            from {
+                bottom: 30px;
+                opacity: 1;
+            }
+            to {
+                bottom: 0;
+                opacity: 0;
+            }
+        }
+
+        /* Show Password Icon */
+        .show-password-icon {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Employee Management System</h1>
+        <form id="signinForm">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter Username" required>
+            <label for="password">Password</label>
+            <div style="position: relative;">
+                <input type="password" id="password" placeholder="Enter Password" required minlength="6">
+                <span class="show-password-icon" id="showPassword" onclick="togglePasswordVisibility()">👁️</span>
+            </div>
+            <button type="button" id="login">Login</button>
+            <button type="button" id="signup">Sign Up</button>
+
+            <!-- Flip Button for Reset -->
+            <div class="flip-container">
+                <div class="flip">
+                    <button type="reset" id="reset" class="front">Reset</button>
+                    <button type="reset" id="reset" class="back">Reset</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div id="toast"></div>
+
+    <script>
+        const loginBtn = document.getElementById('login');
+        const signupBtn = document.getElementById('signup');
+        const resetBtn = document.getElementById('reset');
+        const toast = document.getElementById('toast');
+
+        // Display Toast Notification
+        function showToast(message) {
+            toast.innerText = message;
+            toast.className = "show";
+            setTimeout(() => {
+                toast.className = toast.className.replace("show", "");
+            }, 3000);
+        }
+
+        // Login Button Click
+        loginBtn.addEventListener('click', async () => {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (!username || !password) {
+                showToast('Username and Password are required!');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:5000/api/auth/signin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password }),
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showToast('Successfully Logged In');
+                    // Store login status
+                     sessionStorage.setItem('isLoggedIn', 'true');
+                    setTimeout(() => {
+                        window.location.href = 'EMS.html'; // Redirect to home page
+                    }, 2000);
+                } else {
+                    showToast('Username/Password is incorrect');
+                }
+            } catch (error) {
+                showToast('Error connecting to server!');
+            }
+        });
+
+        // Sign Up Button Click
+        signupBtn.addEventListener('click', () => {
+            document.body.style.animation = "dropWaves 1s ease-in-out infinite";
+        });
+
+        // Reset Button Click
+        resetBtn.addEventListener('click', () => {
+            document.body.style.animation = "dropWaves 1s ease-in-out infinite";
+        });
+
+        // Toggle Password Visibility
+        function togglePasswordVisibility() {
+            const passwordField = document.getElementById('password');
+            const passwordType = passwordField.type;
+
+            if (passwordType === 'password') {
+                passwordField.type = 'text';
+            } else {
+                passwordField.type = 'password';
+            }
+        }
+
+        // Custom Animations
+        document.styleSheets[0].insertRule(`
+            @keyframes dropWaves {
+                0% { transform: translateY(0); }
+                50% { transform: translateY(10px); }
+                100% { transform: translateY(0); }
+            }
+        `);
+
+        document.styleSheets[0].insertRule(`
+            @keyframes blink {
+                0%, 100% { background-color: rgba(255, 255, 255, 0.7); }
+                50% { background-color: rgba(0, 0, 0, 0.7); }
+            }
+        `);
+    </script>
+</body>
+</html>

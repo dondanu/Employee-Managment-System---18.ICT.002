@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Management</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('../img/rain4.gif'); /* Replace with your background image URL */
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        h1 {
+            font-family: 'Lora', serif; /* New Font for Title */
+            background-color: #f334b3; /* Tomato Color */
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 40px;
+            text-align: center;
+            text-transform: uppercase;
+            margin-top: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            color: #ff6347;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Form Styling */
+        form {
+            width: 50%;
+            margin: 0 auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        label {
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            display: block;
+            color: #ffd700;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 5px;
+        }
+
+        input[type="text"], input[type="number"] {
+            background-color: #fff;
+            color: #333;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .reset-button {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .reset-button:hover {
+            background-color: #c82333;
+        }
+
+        /* Toast Message Styling */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #28a745;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            box-shadow: 0 4px 8px rgba(0, 128, 0, 0.3);
+            opacity: 0;
+            animation: fadeInOut 4s forwards;
+        }
+
+        .error-toast {
+            background-color: #dc3545;
+            box-shadow: 0 4px 8px rgba(255, 0, 0, 0.3);
+        }
+
+        /* Fade-in and Fade-out animation */
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                bottom: 10px;
+            }
+            10% {
+                opacity: 1;
+                bottom: 20px;
+            }
+            90% {
+                opacity: 1;
+                bottom: 20px;
+            }
+            100% {
+                opacity: 0;
+                bottom: 10px;
+            }
+        }
+
+        /* Table Styling */
+        table {
+            width: 80%;
+            margin: 40px auto;
+            border-collapse: collapse;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 8px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        th {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+        td {
+            background-color: #947e8b;
+            color: #333;
+        }
+
+        td button {
+            background-color: #ff6347;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        td button:hover {
+            background-color: #dc3545;
+        }
+
+        td button:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <h1>Salary Management</h1>
+
+    <!-- Add Salary Form -->
+    <h2>Add Salary</h2>
+    <form id="addSalaryForm">
+        <label for="employeeID">Employee ID:</label>
+        <input type="text" id="employeeID" name="employeeID" required><br>
+
+        <label for="baseSalary">Base Salary:</label>
+        <input type="number" id="baseSalary" name="baseSalary" required><br>
+
+        <label for="bonuses">Bonuses:</label>
+        <input type="number" id="bonuses" name="bonuses"><br>
+
+        <label for="deductions">Deductions:</label>
+        <input type="number" id="deductions" name="deductions"><br>
+
+        <button type="submit">Add Salary</button>
+        <button type="button" class="reset-button" id="resetAddSalaryForm">Reset</button>
+    </form>
+
+    <!-- Apply Bonus Form -->
+    <h2>Apply Bonus (10%)</h2>
+    <form id="applyBonusForm">
+        <label for="bonusEmployeeID">Employee ID:</label>
+        <input type="text" id="bonusEmployeeID" name="bonusEmployeeID" required><br>
+        <button type="submit">Apply Bonus</button>
+        <button type="button" class="reset-button" id="resetApplyBonusForm">Reset</button>
+    </form>
+
+    <!-- View Salaries Section -->
+    <h2>View Salaries</h2>
+    <table id="salaryTable">
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>Base Salary</th>
+                <th>Bonuses</th>
+                <th>Deductions</th>
+                <th>Final Salary</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        // Show Toast Message
+        function showToast(message, isError = false) {
+            const toast = document.createElement('div');
+            toast.classList.add('toast');
+            if (isError) {
+                toast.classList.add('error-toast');
+                toast.innerText = `Error: ${message}`;
+            } else {
+                toast.innerText = `Success: ${message}`;
+            }
+            document.body.appendChild(toast);
+
+            // Remove the toast after it finishes showing
+            setTimeout(() => {
+                toast.remove();
+            }, 4000);
+        }
+
+        // Add Salary
+        $('#addSalaryForm').submit(function (event) {
+            event.preventDefault();
+            const data = {
+                EmployeeID: $('#employeeID').val(),
+                BaseSalary: parseFloat($('#baseSalary').val()),
+                Bonuses: parseFloat($('#bonuses').val()) || 0,
+                Deductions: parseFloat($('#deductions').val()) || 0,
+                FinalSalary: parseFloat($('#baseSalary').val()) + (parseFloat($('#bonuses').val()) || 0) - (parseFloat($('#deductions').val()) || 0)
+            };
+
+            $.ajax({
+                url: 'http://localhost:5000/api/salary',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: function (response) {
+                    showToast('Salary added successfully!');
+                    fetchSalaries(); // Update the salary view table
+                },
+                error: function (error) {
+                    showToast('Error adding salary!', true);
+                }
+            });
+        });
+
+        // Apply Bonus
+        $('#applyBonusForm').submit(function (event) {
+            event.preventDefault();
+            const employeeID = $('#bonusEmployeeID').val();
+
+            $.ajax({
+                url: `http://localhost:5000/api/salary/bonus/${employeeID}`,
+                method: 'PUT',
+                success: function (response) {
+                    showToast('Bonus applied successfully!');
+                    fetchSalaries(); // Update the salary view table
+                },
+                error: function (error) {
+                    showToast('Error applying bonus!', true);
+                }
+            });
+        });
+
+        // Delete Salary by Employee ID
+        function deleteSalary(employeeID) {
+            $.ajax({
+                url: `http://localhost:5000/api/salary/${employeeID}`,
+                method: 'DELETE',
+                success: function (response) {
+                    showToast('Salary deleted successfully!');
+                    fetchSalaries(); // Update the salary view table
+                },
+                error: function (error) {
+                    showToast('Error deleting salary!', true);
+                }
+            });
+        }
+
+        // Reset Add Salary Form
+        $('#resetAddSalaryForm').click(function() {
+            $('#addSalaryForm')[0].reset();
+        });
+
+        // Reset Apply Bonus Form
+        $('#resetApplyBonusForm').click(function() {
+            $('#applyBonusForm')[0].reset();
+        });
+
+        // Fetch and View Salaries
+        function fetchSalaries() {
+            $.ajax({
+                url: 'http://localhost:5000/api/salary',
+                method: 'GET',
+                success: function (response) {
+                    const salaries = response;
+                    const tableBody = $('#salaryTable tbody');
+                    tableBody.empty();
+                    salaries.forEach(salary => {
+                        tableBody.append(`
+                            <tr>
+                                <td>${salary.EmployeeID}</td>
+                                <td>${salary.BaseSalary}</td>
+                                <td>${salary.Bonuses}</td>
+                                <td>${salary.Deductions}</td>
+                                <td>${salary.FinalSalary}</td>
+                                <td><button onclick="deleteSalary('${salary.EmployeeID}')">Delete</button></td>
+                            </tr>
+                        `);
+                    });
+                },
+                error: function (error) {
+                    showToast('Error fetching salaries!', true);
+                }
+            });
+        }
+
+        // Initial fetch of salaries
+        fetchSalaries();
+    </script>
+</body>
+</html>

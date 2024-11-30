@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management System (EMS)</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('../img/j.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Header Section */
+        header {
+            background-color: rgba(0, 123, 255, 0.8);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            padding-bottom: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo img {
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        header .logo h1 {
+            display: inline-block;
+            margin: 0;
+            font-size: 20px;
+            font-family: 'Pacifico', cursive;
+            background-color: rgba(4, 132, 236, 0.7); /* Red background with transparency */
+            margin: 0;
+            font-size: 48px;
+            font-weight: 400;
+            border-radius: 50px; /* Rounds the background, making it oval-like */
+            display: inline-block;
+            position: relative; /* Allow absolute positioning inside the container */
+            top: 100%; /* Centers vertically */
+            left: 45%; /* Centers horizontally */
+            bottom: 50%;
+            transform: translate(-50%, -14%); /* Adjusts the positioning to truly center it */
+        }
+
+        header .search-and-signin {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        header .search-bar input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        header .search-bar button {
+            padding: 8px;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        header .search-bar button:hover {
+            background-color: #218838;
+        }
+
+        header .sign-in-btn {
+            background-color: #28a745;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        header .sign-in-btn:hover {
+            background-color: #218838;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            overflow-x: auto;
+            justify-content: space-between;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-buttons button {
+            padding: 15px 20px;
+            margin: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-buttons button:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+
+        /* Field Sections */
+        section {
+            position: relative;
+            padding: 20px;
+            margin: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        section img {
+            max-width: 100px;
+            display: block;
+            margin: 0 auto 15px;
+        }
+
+        section:hover {
+            animation: blink 2s infinite;
+        }
+
+        /* Blink Effect */
+        @keyframes blink {
+            50% {
+                background-color: rgba(0, 123, 255, 0.1);
+            }
+        }
+
+        section h3 {
+            color: #007bff;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        section p {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .platform-features {
+        padding: 30px;
+        margin: 20px auto;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 1s ease-in-out;
+        position: relative;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .features-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .features-right,
+    .features-center,
+    .features-left {
+        flex: 1;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .features-right:hover,
+    .features-center:hover,
+    .features-left:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    h3 {
+        font-size: 20px;
+        color: #007bff;
+        margin-bottom: 10px;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    ul li {
+        font-size: 16px;
+        color: #555;
+        line-height: 1.8;
+        margin-bottom: 8px;
+    }
+
+    .features-right {
+        order: 3;
+    }
+
+    .features-center {
+        order: 2;
+    }
+
+    .features-left {
+        order: 1;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .contact {
+        padding: 30px;
+        margin: 20px auto;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 1s ease-in-out;
+        text-align: center;
+    }
+
+    .contact h3 {
+        font-size: 24px;
+        color: #007bff;
+        margin-bottom: 20px;
+    }
+
+    .contact-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .contact-item {
+        flex: 1 1 calc(25% - 20px); /* 4 items per row */
+        text-align: center;
+        font-size: 16px;
+        line-height: 1.6;
+        background: #f9f9f9;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact-item:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .contact-item a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .contact-item a:hover {
+        text-decoration: underline;
+    }
+
+    .icon {
+        width: 30px;
+        height: 30px;
+        transition: transform 0.3s ease;
+    }
+
+    .icon:hover {
+        transform: scale(1.2);
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="../img/l.jpg" alt="Company Logo">
+            <h1> Employee Management System </h1>
+        </div>
+        <div class="search-and-signin">
+            <div class="search-bar">
+                <input type="text" id="search" placeholder="Search...">
+                <button onclick="searchFunction()">Search</button>
+            </div>
+            <button class="sign-in-btn" id="logoutBtn">Logout</button>
+            
+        </div>
+    </header>
+
+    <!-- Navigation Buttons -->
+    <section class="nav-buttons">
+        <button onclick="navigateTo('add.html')">Add Employee</button>
+        <button onclick="navigateTo('attendance.html')">Attendance</button>
+        <button onclick="navigateTo('benefits.html')">Welfare Management</button>
+        <button onclick="navigateTo('leave.html')">Leave Management</button>
+        <button onclick="navigateTo('task.html')">Task & Project Management</button>
+        <button onclick="navigateTo('saftey.html')">Safety Management</button>
+        <button onclick="navigateTo('slary.html')">Salary Management</button>
+    </section>
+
+    <!-- Welcome Section -->
+    <section class="welcome-section">
+        
+        <h3>Welcome to EMS!</h3>
+        <p>Your one-stop solution for managing employee data efficiently and effectively. Explore various modules to manage attendance, salary, welfare, tasks, and more. Simplify your operations with our intuitive platform. Make EMS your go-to solution today!</p>
+    </section>
+
+    <!-- Platform Features Section -->
+<section class="platform-features">
+    <div class="features-container">
+        <!-- First Part -->
+        <div class="features-right">
+            <h3>Platform Features</h3>
+            <ul>
+                <li>Efficient Employee Data Management</li>
+                <li>Real-time Attendance Tracking</li>
+                <li>Comprehensive Leave Management</li>
+                <li>Secure Salary Management System</li>
+                <li>Automated Welfare Tracking</li>
+                <li>Advanced Task Assignment Tools</li>
+            </ul>
+        </div>
+
+        <!-- Second Part -->
+        <div class="features-center">
+            <h3>All-in-one HRMS System</h3>
+            <ul>
+                <li>Centralized Employee Records</li>
+                <li>Customizable HR Policies</li>
+                <li>Detailed Employee Analytics</li>
+                <li>Integrated Workflow Automation</li>
+                <li>Scalable Solutions for Enterprises</li>
+                <li>Robust Data Security Measures</li>
+            </ul>
+        </div>
+
+        <!-- Third Part -->
+        <div class="features-left">
+            <h3>Work Savvy & Better With Top Premium Features</h3>
+            <ul>
+                <li>Seamless Onboarding Process</li>
+                <li>Remote Work Management</li>
+                <li>Employee Self-Service Portal</li>
+                <li>Performance Appraisal System</li>
+                <li>Instant Notifications and Alerts</li>
+                <li>Third-Party Integrations</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+    <!-- Additional Features Section -->
+    <section class="additional-features">
+        
+        <h3>Additional Features</h3>
+        <p>EMS offers a modern and scalable solution to streamline HR workflows and ensure optimal employee performance.</p>
+    </section>
+
+    <!-- Contact Us Section -->
+<section class="contact">
+    <h3>Contact Us</h3>
+    <div class="contact-grid">
+        <!-- CEO -->
+        <div class="contact-item">
+            <strong>CEO:</strong> Kuganesan Dhanusan
+        </div>
+        <!-- Email -->
+        <div class="contact-item">
+            <strong>Email:</strong> <a href="mailto:support@ems.com">Dhanushiiii@outlook.com</a>
+        </div>
+        <!-- Phone Number -->
+        <div class="contact-item">
+            <strong>Phone:</strong> +94 77-086-6140
+        </div>
+        <!-- LinkedIn -->
+        <div class="contact-item">
+            <a href="https://www.linkedin.com/in/s-k-dhanu-6a43851ba/" target="_blank">
+                <img src="../img/linkedin.png" alt="LinkedIn" class="icon">
+            </a>
+        </div>
+        <!-- GitHub -->
+        <div class="contact-item">
+            <a href="https://github.com/dondanu" target="_blank">
+                <img src="../img/github.png" alt="GitHub" class="icon">
+            </a>
+        </div>
+        <!-- Facebook -->
+        <div class="contact-item">
+            <a href="https://facebook.com" target="_blank">
+                <img src="../img/facebook.png" alt="Facebook" class="icon">
+            </a>
+        </div>
+        <!-- Instagram -->
+        <div class="contact-item">
+            <a href="https://instagram.com" target="_blank">
+                <img src="../img/instagram.png" alt="Instagram" class="icon">
+            </a>
+        </div>
+        <!-- YouTube -->
+        <div class="contact-item">
+            <a href="https://youtube.com" target="_blank">
+                <img src="../img/youtube.png" alt="YouTube" class="icon">
+            </a>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Check if the user is logged in
+    window.onload = function () {
+        const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+        if (!isLoggedIn || isLoggedIn !== 'true') {
+            // Redirect to signin.html if not logged in
+            window.location.href = 'signin.html';
+        }
+    };
+
+        // Function to log out the user
+        document.getElementById('logoutBtn').addEventListener('click', function () {
+        // Clear the sessionStorage
+        sessionStorage.removeItem('isLoggedIn');
+        // Redirect to signin.html
+        window.location.href = 'signin.html';
+    });
+
+    // Function to navigate to different pages
+    function navigateTo(page) {
+        window.location.href = page;
+    }
+
+    // Search Functionality
+    function searchFunction() {
+        let query = document.getElementById('search').value;
+        if (query) {
+            alert("Searching for: " + query);
+        } else {
+            alert("Please enter a search term");
+        }
+    }
+</script>
+
+</body>
+</html>

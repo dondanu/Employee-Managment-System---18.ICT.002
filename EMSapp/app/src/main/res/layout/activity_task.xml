@@ -1,0 +1,80 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/et_employee_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Employee ID" />
+
+    <EditText
+        android:id="@+id/et_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Task Title" />
+
+    <EditText
+        android:id="@+id/et_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Task Description" />
+
+    <EditText
+        android:id="@+id/et_assigned_to"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Assigned To" />
+
+    <EditText
+        android:id="@+id/et_start_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Start Date" />
+
+    <EditText
+        android:id="@+id/et_end_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="End Date" />
+
+    <EditText
+        android:id="@+id/et_priority"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Priority" />
+
+    <Button
+        android:id="@+id/btn_add_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:backgroundTint="#3F51B5"
+        android:text="Add Task" />
+
+    <Button
+        android:id="@+id/btn_task_records"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:backgroundTint="#4CAF50"
+        android:text="Task Records" />
+
+    <Button
+        android:id="@+id/btn_back_to_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:backgroundTint="#FA1313"
+        android:text="Back to Home" />
+
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:backgroundTint="#920EB3"
+        android:text="Reset" />
+</LinearLayout>

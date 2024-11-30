@@ -1,0 +1,38 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:padding="12dp"
+    android:layout_marginBottom="8dp">
+
+    <!-- Employee ID -->
+    <TextView
+        android:id="@+id/tvEmployeeID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-medium" />
+
+    <!-- Employee Name -->
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#757575"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif" />
+
+    <!-- Delete Button -->
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:backgroundTint="#D32F2F"
+        android:text="Delete"
+        android:textColor="#FFFFFF" />
+</LinearLayout>

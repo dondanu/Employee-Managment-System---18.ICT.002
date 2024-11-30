@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance Management</title>
+
+  <!-- Adding Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Poppins:wght@300;400;600&family=Merriweather:wght@400;700&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100vh;
+      padding: 20px;
+      flex-direction: column;
+      gap: 20px;
+      background-image: url('../img/rain5.gif'); /* './' என்பது project folder-ஐ குறிக்கிறது */
+      background-size: cover;
+      background-position: center;
+    }
+
+    h1 {
+      font-family: 'Lora', serif; /* New Font for Title */
+      background-color: #FF6347; /* Tomato Color */
+      color: white;
+      padding: 15px 20px;
+      border-radius: 10px;
+      font-size: 40px;
+      font-weight: 700; /* Bold */
+      text-align: center;
+      width: 100%;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+      margin-top: 30px;
+      margin-right: 20px;
+      margin-left: -20px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      gap: 20px;
+    }
+
+    /* Left side: Add Attendance Form Styling */
+    #attendanceForm {
+      background-color: rgba(255, 182, 193, 0.9); /* Light pink color */
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+      box-sizing: border-box;
+      margin-left: 20px;
+      background-image: url('../img/rain5.gif'); /* Image for Add Attendance Form */
+      background-size: cover;
+      background-position: center;
+    }
+
+    #attendanceForm input,
+    #attendanceForm select,
+    #attendanceForm button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    #attendanceForm input,
+    #attendanceForm select {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fff;
+      color: #333;
+    }
+
+    #attendanceForm button {
+      font-family: 'Oswald', sans-serif;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #attendanceForm button:hover {
+      background-color: #45a049;
+    }
+
+    /* Right side: Display Attendance List Styling */
+    .attendance-list {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 800px;
+      box-sizing: border-box;
+      margin-right: 20px;
+      background-image: url('../img/rain5.gif'); /* Image for Attendance Records */
+      background-size: cover;
+      background-position: center;
+    }
+
+    .attendance-list table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-family: 'Merriweather', serif;
+    }
+
+    .attendance-list th,
+    .attendance-list td {
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #ddd;
+      font-size: 16px;
+    }
+
+    .attendance-list th {
+      background-color: #4caf50;
+      color: white;
+      font-weight: bold;
+    }
+
+    .attendance-list tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .attendance-list button {
+      background-color: red;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Oswald', sans-serif;
+    }
+
+    .attendance-list button:hover {
+      background-color: #d32f2f;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #attendanceForm,
+      .attendance-list {
+        width: 90%;
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Attendance Management System</h1>
+
+  <div class="container">
+    <!-- Left side: Add Attendance Form -->
+    <form id="attendanceForm">
+      <h2>Add Attendance</h2>
+      <input type="text" id="employeeID" placeholder="Employee ID" required />
+      <input type="date" id="date" required />
+      <input type="text" id="checkInTime" placeholder="Check-In Time" required />
+      <input type="text" id="checkOutTime" placeholder="Check-Out Time" required />
+      <select id="status" required>
+        <option value="Present">Present</option>
+        <option value="Absent">Absent</option>
+        <option value="Leave">Leave</option>
+      </select>
+      <button type="submit">Add Attendance</button>
+    </form>
+
+    <!-- Right side: Display Attendance List -->
+    <div class="attendance-list" id="attendanceList">
+      <h2>Attendance Records</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Employee ID</th>
+            <th>Date</th>
+            <th>Check-In Time</th>
+            <th>Check-Out Time</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="attendanceTableBody">
+          <!-- Data will be inserted here dynamically -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    // Add Attendance Data
+    document.getElementById('attendanceForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = {
+        EmployeeID: document.getElementById('employeeID').value,
+        Date: document.getElementById('date').value,
+        CheckInTime: document.getElementById('checkInTime').value,
+        CheckOutTime: document.getElementById('checkOutTime').value,
+        Status: document.getElementById('status').value
+      };
+
+      // Sending POST request to save attendance data
+      const response = await fetch('http://localhost:5000/api/attendance', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+      alert(result.message || 'Attendance added successfully!');
+      getAttendance(); // Refresh the attendance list
+      document.getElementById('attendanceForm').reset(); // Reset the form
+    });
+
+    // Fetch Attendance Data
+    async function getAttendance() {
+      const response = await fetch('http://localhost:5000/api/attendance');
+      const data = await response.json();
+      const tableBody = document.getElementById('attendanceTableBody');
+      tableBody.innerHTML = '';
+
+      data.forEach(attendance => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${attendance.EmployeeID}</td>
+          <td>${attendance.Date}</td>
+          <td>${attendance.CheckInTime}</td>
+          <td>${attendance.CheckOutTime}</td>
+          <td>${attendance.Status}</td>
+          <td><button onclick="deleteAttendance('${attendance._id}')">Delete</button></td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Delete Attendance Data
+    async function deleteAttendance(attendanceID) {
+      const response = await fetch(`http://localhost:5000/api/attendance/${attendanceID}`, {
+        method: 'DELETE'
+      });
+
+      const result = await response.json();
+      alert(result.message || 'Attendance deleted successfully!');
+      getAttendance(); // Refresh the list after deletion
+    }
+
+    // Load the attendance list when the page is loaded
+    window.onload = function () {
+      getAttendance();
+    };
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,264 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_margin="10dp"
+    android:background="#7FF2ED">
+
+    <!-- Title Section: Employee Management System -->
+    <TextView
+        android:id="@+id/titleText"
+        android:fontFamily="sans-serif-light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Employee Management System"
+        android:textSize="29sp"
+        android:textColor="#2C3E50"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"/>
+
+    <!-- First Row of Buttons -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/btnAddEmployee"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Add Employee"
+            android:background="#FF6347"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btnUpdateEmployee"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Update Employee"
+            android:background="#32CD32"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btnDeleteEmployee"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Delete Employee"
+            android:background="#FF4500"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- Second Row: View Employees Button -->
+    <Button
+        android:id="@+id/btnViewEmployees"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Employees"
+        android:background="#1E90FF"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Third Row of Buttons -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/viewAttendanceButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Atendance"
+            android:background="#8A2BE2"
+            android:textColor="#FFFFFF"
+            android:textSize="13.5dp"
+            android:textStyle="bold"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btn_welfare"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Welfare"
+            android:background="#FFD700"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btn_task"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Task"
+            android:background="#4CAF50"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- Fourth Row of Buttons -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+
+        <Button
+            android:id="@+id/btn_safety"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Safety"
+            android:background="#DC143C"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btn_salary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Salary"
+            android:background="#00BFFF"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btnLeave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Leave"
+            android:background="#FFD700"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- Paragraph Section: Welcome Text -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Welcome to EMS!"
+        android:textSize="17sp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="#2C3E50"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your one-stop solution for managing employee data efficiently and effectively. Explore various modules to manage attendance, salary, welfare, tasks, and more. Simplify your operations with our intuitive platform. Make EMS your go-to solution today!"
+        android:textSize="17sp"
+        android:textColor="#34495E"
+        android:lineSpacingExtra="6sp"
+        android:layout_marginBottom="20dp"/>
+
+    <!-- List Section: Features -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Better With Top Premium Features"
+        android:textSize="17sp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="#2C3E50"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="- Seamless Onboarding Process"
+        android:textSize="14sp"
+        android:textColor="#34495E"
+        android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="- Remote Work Management"
+        android:textSize="14sp"
+        android:textColor="#34495E"
+        android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="- Employee Self-Service Portal"
+        android:textSize="14sp"
+        android:textColor="#34495E"
+        android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="- Performance Appraisal System"
+        android:textSize="14sp"
+        android:textColor="#34495E"
+        android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="- Instant Notifications and Alerts"
+        android:textSize="14sp"
+        android:textColor="#34495E"
+        android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="- Third-Party Integrations"
+        android:textSize="14sp"
+        android:textColor="#34495E"
+        android:layout_marginBottom="10dp"/>
+
+
+    <!-- Footer Section: CEO and GitHub -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/ceoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CEO - Danushan"
+            android:textSize="16sp"
+            android:layout_weight="1"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="40sp"
+            android:textColor="#2C3E50"/>
+
+        <TextView
+            android:id="@+id/githubText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GitHub"
+            android:textSize="16sp"
+            android:layout_weight="1"
+            android:textColor="#2980B9"
+            android:clickable="true"
+            android:focusable="true" />
+    </LinearLayout>
+
+</LinearLayout>

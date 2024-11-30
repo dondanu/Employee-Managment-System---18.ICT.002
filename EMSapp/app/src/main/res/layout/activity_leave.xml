@@ -1,0 +1,74 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#8AED68">
+
+    <!-- Employee ID -->
+    <EditText
+        android:id="@+id/edtEmployeeId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Employee ID"
+        android:inputType="text" />
+
+    <!-- Leave Type -->
+    <EditText
+        android:id="@+id/edtLeaveType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Leave Type"
+
+        android:inputType="text" />
+
+    <!-- Start Date -->
+    <EditText
+        android:id="@+id/edtStartDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Start Date"
+        android:inputType="date" />
+
+    <!-- End Date -->
+    <EditText
+        android:id="@+id/edtEndDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="End Date"
+        android:inputType="date" />
+
+    <!-- Apply Leave Button -->
+    <Button
+        android:id="@+id/btnApplyLeave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Apply Leave"
+        android:textSize="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#4CAF50"
+        android:textColor="#FFFFFF" />
+
+    <!-- Leave List Button -->
+    <Button
+        android:id="@+id/btnLeaveList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Leave List"
+        android:textSize="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#2196F3"
+        android:textColor="#FFFFFF" />
+
+    <!-- Back to Home Button -->
+    <Button
+        android:id="@+id/btnBackHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back to Home"
+        android:textSize="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#F44336"
+        android:textColor="#FFFFFF" />
+</LinearLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="#FFFFFF"
+
+    android:elevation="4dp">
+
+    <!-- Employee ID -->
+    <TextView
+        android:id="@+id/txtEmployeeId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Employee ID: 12345"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:padding="5dp"
+        android:fontFamily="sans-serif-medium" />
+
+    <!-- Attendance Date -->
+    <TextView
+        android:id="@+id/txtDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date: 2024-11-27"
+        android:textSize="14sp"
+        android:textColor="#757575"
+        android:padding="5dp"
+        android:fontFamily="sans-serif" />
+
+    <!-- Status -->
+    <TextView
+        android:id="@+id/txtStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Status: Present"
+        android:textSize="14sp"
+        android:textColor="#4CAF50"
+        android:padding="5dp"
+        android:fontFamily="sans-serif" />
+
+    <!-- Delete Button -->
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:textColor="#FFFFFF"
+        android:background="#F44336"
+        android:layout_gravity="end"
+        android:layout_marginTop="10dp"/>
+</LinearLayout>

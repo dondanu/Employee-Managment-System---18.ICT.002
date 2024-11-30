@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Safety Management</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('../img/w.gif'); /* Replace with your desired background image URL */
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      line-height: 1.6;
+    }
+    h1 {
+      text-align: center;
+      color: #fff;
+      font-size: 3em;
+      margin-top: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    h2 {
+      color: #ffd700;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 2em;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    form {
+      width: 50%;
+      margin: 0 auto;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    label {
+      font-size: 1.2em;
+      margin-bottom: 8px;
+      display: block;
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 5px;
+    }
+    input[type="text"], input[type="date"], textarea {
+      background-color: #fff;
+      color: #333;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    .reset-button {
+      background-color: #dc3545;
+      color: white;
+    }
+    .reset-button:hover {
+      background-color: #c82333;
+    }
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 8px;
+    }
+    th, td {
+      padding: 12px;
+      text-align: center;
+      font-size: 1.1em;
+    }
+    th {
+      background-color: #6c757d;
+      color: #fff;
+    }
+    td {
+      background-color: #f0d39d;
+      background-image: url('../img/s3.gif'); /* Replace with your background image URL */
+      color: #ffffff;
+    }
+    td button {
+      background-color: #ff6347;
+      color: rgb(0, 163, 87);
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+    td button:hover {
+      background-color: #dc3545;
+    }
+    td button:active {
+      transform: scale(0.98);
+    }
+    /* Toast Styles */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #28a745;
+      color: white;
+      padding: 15px 30px;
+      border-radius: 8px;
+      font-size: 1.2em;
+      box-shadow: 0 4px 8px rgba(0, 128, 0, 0.3);
+      opacity: 0;
+      animation: fadeInOut 4s forwards;
+    }
+    .error-toast {
+      background-color: #dc3545;
+      box-shadow: 0 4px 8px rgba(255, 0, 0, 0.3);
+    }
+    @keyframes fadeInOut {
+      0% {
+        opacity: 0;
+        bottom: 10px;
+      }
+      10% {
+        opacity: 1;
+        bottom: 20px;
+      }
+      90% {
+        opacity: 1;
+        bottom: 20px;
+      }
+      100% {
+        opacity: 0;
+        bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Safety Management</h1>
+
+  <!-- Form to Add Incident -->
+  <form id="incidentForm">
+    <label for="incidentId">Incident ID:</label>
+    <input type="text" id="incidentId" required>
+    <label for="employeeId">Employee ID:</label>
+    <input type="text" id="employeeId" required>
+    <label for="description">Description:</label>
+    <textarea id="description" rows="4" required></textarea>
+    <label for="dateReported">Date Reported:</label>
+    <input type="date" id="dateReported" required>
+    <button type="submit">Add Incident</button>
+    <button type="button" class="reset-button" id="resetIncidentForm">Reset</button>
+  </form>
+
+  <!-- Incidents Table -->
+  <h2>Incident List</h2>
+  <table id="incidentTable">
+    <thead>
+      <tr>
+        <th>Incident ID</th>
+        <th>Employee ID</th>
+        <th>Description</th>
+        <th>Date Reported</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const apiUrl = 'http://localhost:5000/api/safety';
+
+    // Fetch incidents
+    async function fetchIncidents() {
+      const response = await fetch(apiUrl);
+      const incidents = await response.json();
+      const tableBody = document.querySelector('#incidentTable tbody');
+      tableBody.innerHTML = '';
+      incidents.forEach(incident => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${incident.incidentId}</td>
+          <td>${incident.employeeId}</td>
+          <td>${incident.description}</td>
+          <td>${new Date(incident.dateReported).toLocaleDateString()}</td>
+          <td>${incident.status}</td>
+          <td>
+            <button onclick="updateStatus('${incident.incidentId}', 'Resolved')">Resolve</button>
+            <button onclick="deleteIncident('${incident.incidentId}')">Delete</button>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Add incident
+    document.getElementById('incidentForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const incidentData = {
+        incidentId: document.getElementById('incidentId').value,
+        employeeId: document.getElementById('employeeId').value,
+        description: document.getElementById('description').value,
+        dateReported: document.getElementById('dateReported').value,
+        status: 'Pending'
+      };
+      await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(incidentData)
+      });
+      showToast('Incident Added Successfully!');
+      fetchIncidents();
+    });
+
+    // Update status
+    async function updateStatus(incidentId, status) {
+      await fetch(`${apiUrl}/${incidentId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status })
+      });
+      showToast('Incident Resolved!');
+      fetchIncidents();
+    }
+
+    // Delete incident
+    async function deleteIncident(incidentId) {
+      await fetch(`${apiUrl}/${incidentId}`, { method: 'DELETE' });
+      showToast('Incident Deleted!');
+      fetchIncidents();
+    }
+
+    // Show Toast Message
+    function showToast(message, isError = false) {
+      const toast = document.createElement('div');
+      toast.classList.add('toast');
+      if (isError) {
+        toast.classList.add('error-toast');
+        toast.innerText = `Error: ${message}`;
+      } else {
+        toast.innerText = `Success: ${message}`;
+      }
+      document.body.appendChild(toast);
+
+      // Remove the toast after it finishes showing
+      setTimeout(() => {
+        toast.remove();
+      }, 4000);
+    }
+
+    // Reset the form
+    document.getElementById('resetIncidentForm').addEventListener('click', () => {
+      document.getElementById('incidentForm').reset();
+    });
+
+    // Initial fetch
+    fetchIncidents();
+  </script>
+</body>
+</html>

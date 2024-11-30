@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leave Management</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 20px;
+      background-image: url('../img/s2.gif'); /* Replace with your background image URL */
+      background-size: cover;
+      background-position: center;
+      color: #333;
+    }
+
+    h1, h2 {
+      color: #fff;
+      text-align: center;
+      font-size: 36px;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    form {
+      background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      width: 50%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    label {
+      font-size: 16px;
+      color: #333;
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 5px 0;
+      display: block;
+      width: 100%;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    input:focus, button:focus {
+      outline: none;
+      border-color: #4CAF50;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .reset-button {
+      background-color: #f44336; /* Red color for reset */
+      color: white;
+    }
+
+    .reset-button:hover {
+      background-color: #d32f2f; /* Darker red */
+    }
+
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background-color: rgba(255, 255, 255, 0.7); /* Transparent background */
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    td {
+      background-color: #fff;
+    }
+
+    td button {
+      background-color: #ff9800;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    td button:hover {
+      background-color: #f57c00;
+    }
+
+    td button:active {
+      background-color: #e65100;
+    }
+
+    @media (max-width: 768px) {
+      form {
+        width: 80%;
+      }
+      table {
+        width: 95%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Leave Management</h1>
+
+  <!-- Leave Form -->
+  <form id="leaveForm">
+    <label for="employeeId">Employee ID</label>
+    <input type="text" id="employeeId" name="employeeId" value="ICT002" required>
+    
+    <label for="leaveType">Leave Type</label>
+    <input type="text" id="leaveType" name="leaveType" value="Sick Leave" required>
+    
+    <label for="startDate">Start Date</label>
+    <input type="date" id="startDate" name="startDate" required>
+    
+    <label for="endDate">End Date</label>
+    <input type="date" id="endDate" name="endDate" required>
+    
+    <button type="submit">Add Leave</button>
+    <button type="button" class="reset-button" id="resetLeaveForm">Reset</button> <!-- Reset button added -->
+  </form>
+
+  <!-- Leave List -->
+  <h2>Leave List</h2>
+  <table id="leaveTable">
+    <thead>
+      <tr>
+        <th>Employee ID</th>
+        <th>Leave Type</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const apiUrl = 'http://localhost:5000/api/leaves';
+
+    // Fetch and display leaves
+    async function fetchLeaves() {
+      const response = await fetch(apiUrl);
+      const leaves = await response.json();
+      const leaveTableBody = document.querySelector('#leaveTable tbody');
+      leaveTableBody.innerHTML = ''; // Clear existing rows
+
+      leaves.forEach(leave => {
+        const startDate = new Date(leave.startDate);
+        const endDate = new Date(leave.endDate);
+
+        // Check for LeaveStatus and map correctly
+        const status = leave.LeaveStatus || 'Pending'; // Default to 'Pending' if LeaveStatus is undefined
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${leave.employeeId}</td>
+          <td>${leave.leaveType}</td>
+          <td>${startDate.toLocaleDateString()}</td>
+          <td>${endDate.toLocaleDateString()}</td>
+          <td>${status}</td>
+          <td>
+            <button onclick="updateLeaveStatus('${leave.employeeId}', 'Approved')">Approve</button>
+            <button onclick="updateLeaveStatus('${leave.employeeId}', 'Rejected')">Reject</button>
+            <button onclick="deleteLeave('${leave.employeeId}')">Delete</button>
+          </td>
+        `;
+        leaveTableBody.appendChild(row);
+      });
+    }
+
+    // Add new leave
+    document.getElementById('leaveForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const employeeId = document.getElementById('employeeId').value;
+      const leaveType = document.getElementById('leaveType').value;
+      const startDate = document.getElementById('startDate').value;
+      const endDate = document.getElementById('endDate').value;
+
+      const leaveData = { employeeId, leaveType, startDate, endDate };
+
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(leaveData)
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          alert('Leave added successfully');
+          fetchLeaves();  // Refresh the leave list
+        } else {
+          const error = await response.json();
+          alert('Error: ' + error.message);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    });
+
+    // Update leave status
+    async function updateLeaveStatus(employeeId, status) {
+      try {
+        const response = await fetch(`${apiUrl}/${employeeId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ LeaveStatus: status }) // Use LeaveStatus
+        });
+
+        if (response.ok) {
+          alert(`Leave ${status}`);
+          fetchLeaves(); // Refresh the leave list
+        } else {
+          const error = await response.json();
+          alert('Error updating leave: ' + error.message);
+        }
+      } catch (error) {
+        console.error('Error updating leave:', error);
+        alert('Leave status update failed.');
+      }
+    }
+
+    // Delete leave
+    async function deleteLeave(employeeId) {
+      try {
+        const response = await fetch(`${apiUrl}/${employeeId}`, { method: 'DELETE' });
+
+        if (response.ok) {
+          alert('Leave deleted successfully');
+          fetchLeaves(); // Refresh the leave list
+        } else {
+          const error = await response.json();
+          alert('Error deleting leave: ' + error.message);
+        }
+      } catch (error) {
+        console.error('Error deleting leave:', error);
+        alert('Leave deletion failed.');
+      }
+    }
+
+    // Reset the form
+    document.getElementById('resetLeaveForm').addEventListener('click', function() {
+      document.getElementById('leaveForm').reset();
+    });
+
+    // Initial fetch
+    fetchLeaves();
+  </script>
+</body>
+</html>

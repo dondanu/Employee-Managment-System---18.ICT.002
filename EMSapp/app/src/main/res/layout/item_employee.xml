@@ -1,0 +1,50 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:padding="12dp"
+    android:layout_marginBottom="8dp"
+    android:elevation="2dp">
+
+    <!-- Employee ID -->
+    <TextView
+        android:id="@+id/tvEmployeeID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#303F9F"
+        android:textSize="20sp"
+        android:text="ID"
+        android:fontFamily="sans-serif-medium" />
+
+    <!-- Name -->
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#6A4F0F"
+        android:textSize="20sp"
+        android:text="Name"
+        android:fontFamily="sans-serif" />
+
+    <!-- Designation -->
+    <TextView
+        android:id="@+id/tvDesignation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#757575"
+        android:textSize="20sp"
+        android:text="Designation"
+        android:fontFamily="sans-serif" />
+
+    <!-- Salary -->
+    <TextView
+        android:id="@+id/tvSalary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#4CAF50"
+        android:textSize="20sp"
+        android:text="Salary"
+        android:fontFamily="sans-serif-medium" />
+</LinearLayout>

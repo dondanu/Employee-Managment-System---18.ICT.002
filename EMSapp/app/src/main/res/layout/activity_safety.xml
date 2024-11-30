@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#F3F3F3">
+
+    <!-- Title of the activity -->
+    <TextView
+        android:id="@+id/title_safety"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Safety Incident"
+        android:textSize="20sp"
+        android:textColor="#FF5722"
+        android:gravity="center"
+        android:padding="16dp"
+        android:background="#FFFFFF"
+        android:textStyle="bold" />
+
+    <!-- Incident ID -->
+    <EditText
+        android:id="@+id/edt_incident_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Incident ID"
+        android:inputType="text"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp"
+        android:background="#FFFFFF"
+        android:textColor="#000000" />
+
+    <!-- Employee ID -->
+    <EditText
+        android:id="@+id/edt_employee_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Employee ID"
+        android:inputType="text"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp"
+        android:background="#FFFFFF"
+        android:textColor="#000000" />
+
+    <!-- Description -->
+    <EditText
+        android:id="@+id/edt_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Description"
+        android:inputType="text"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp"
+        android:background="#FFFFFF"
+        android:textColor="#000000" />
+
+    <!-- Date Reported -->
+    <EditText
+        android:id="@+id/edt_date_reported"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Date Reported"
+        android:inputType="date"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp"
+        android:background="#FFFFFF"
+        android:textColor="#000000" />
+
+    <!-- Add Incident Button -->
+    <Button
+        android:id="@+id/btn_add_incident"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Incident"
+        android:background="#FF5722"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp" />
+
+    <!-- Incident List Button -->
+    <Button
+        android:id="@+id/btn_incident_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Incident List"
+        android:background="#4CAF50"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp" />
+
+
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reset"
+        android:background="#4CAF50"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp" />
+
+    <!-- Back to Home Button -->
+    <Button
+        android:id="@+id/btn_back_to_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back to Home"
+        android:background="#2196F3"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        android:padding="12dp" />
+</LinearLayout>

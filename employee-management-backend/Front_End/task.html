@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Management</title>
+  <style>
+    /* Body Styling */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-image: url('../img/e5.gif'); /* Replace with your background image URL */
+      
+      background-position: center;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1, h2 {
+      text-align: center;
+      font-size: 3em;
+      color: #ff6347; /* Tomato color */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      margin-top: 20px;
+    }
+
+    form {
+      width: 50%;
+      margin: 30px auto;
+      padding: 40px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    label {
+      display: block;
+      font-size: 1.2em;
+      color: #ffd700; /* Gold color */
+      margin: 10px 0 5px;
+      margin-right: 50px;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      font-size: 1.1em;
+      border-radius: 5px;
+      border: none;
+    }
+
+    input[type="text"], input[type="date"], select {
+      background-color: #fff;
+      color: #333;
+    }
+
+    button {
+      background-color: #28a745; /* Green */
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #218838; /* Darker Green */
+    }
+
+    .reset-button {
+      background-color: #dc3545; /* Red */
+      color: white;
+    }
+
+    .reset-button:hover {
+      background-color: #c82333; /* Darker Red */
+    }
+
+    /* Table Styling */
+    table {
+      width: 80%;
+      margin: 40px auto;
+      border-collapse: collapse;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 8px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+      font-size: 1.1em;
+    }
+
+    th {
+      background-color: #6c757d; /* Gray */
+      color: #fff;
+    }
+
+    td {
+      background-color: #f8f9fa;
+      background-image: url('../img/s2.gif'); /* Replace with your background image URL */
+      color: #ffffff;
+      font-style: oblique;
+    }
+
+    td button {
+      background-color: #ff6347; /* Tomato color */
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+
+    td button:hover {
+      background-color: #dc3545; /* Red */
+    }
+
+    td button:active {
+      transform: scale(0.98);
+    }
+
+    /* Response Area Styling */
+    #response {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #000000;
+      color: #333;
+      border-radius: 5px;
+      font-size: 1.2em;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>Task Management</h1>
+
+  <!-- Task Form -->
+  <form id="taskForm">
+    <label for="taskId">Task ID</label>
+    <input type="text" id="taskId" name="taskId" required>
+
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title" required>
+
+    <label for="description">Description</label>
+    <input type="text" id="description" name="description" required>
+
+    <label for="assignedTo">Assigned To</label>
+    <input type="text" id="assignedTo" name="assignedTo" required>
+
+    <label for="startDate">Start Date</label>
+    <input type="date" id="startDate" name="startDate" required>
+
+    <label for="endDate">End Date</label>
+    <input type="date" id="endDate" name="endDate" required>
+
+    <label for="priority">Priority</label>
+    <select id="priority" name="priority">
+      <option value="High">High</option>
+      <option value="Medium">Medium</option>
+      <option value="Low">Low</option>
+    </select>
+
+    <button type="submit">Add Task</button>
+    <button type="button" class="reset-button" id="resetTaskForm">Reset</button>
+  </form>
+
+  <!-- Task List -->
+  <h2>Task List</h2>
+  <table id="taskTable">
+    <thead>
+      <tr>
+        <th>Task ID</th>
+        <th>Title</th>
+        <th>Assigned To</th>
+        <th>Status</th>
+        <th>Priority</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const apiUrl = 'http://localhost:5000/api/tasks';
+
+    // Fetch and display tasks
+    async function fetchTasks() {
+      const response = await fetch(apiUrl);
+      const tasks = await response.json();
+      const taskTableBody = document.querySelector('#taskTable tbody');
+      taskTableBody.innerHTML = '';  // Clear existing rows
+
+      tasks.forEach(task => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${task.taskId}</td>
+          <td>${task.title}</td>
+          <td>${task.assignedTo}</td>
+          <td>${task.status}</td>
+          <td>${task.priority}</td>
+          <td>
+            <button onclick="updateTaskStatus('${task.taskId}', 'Completed')">Complete</button>
+            <button onclick="deleteTask('${task.taskId}')">Delete</button>
+          </td>
+        `;
+        taskTableBody.appendChild(row);
+      });
+    }
+
+    // Add new task
+    document.getElementById('taskForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+
+      const taskData = {
+        taskId: document.getElementById('taskId').value,
+        title: document.getElementById('title').value,
+        description: document.getElementById('description').value,
+        assignedTo: document.getElementById('assignedTo').value,
+        startDate: document.getElementById('startDate').value,
+        endDate: document.getElementById('endDate').value,
+        priority: document.getElementById('priority').value
+      };
+
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(taskData)
+      });
+
+      const result = await response.json();
+      alert(result.message);
+      fetchTasks();  // Refresh task list
+    });
+
+    // Update task status
+    async function updateTaskStatus(taskId, status) {
+      const response = await fetch(`${apiUrl}/${taskId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status })
+      });
+
+      const result = await response.json();
+      alert(result.message);
+      fetchTasks();  // Refresh task list
+    }
+
+    // Delete task
+    async function deleteTask(taskId) {
+      const response = await fetch(`${apiUrl}/${taskId}`, {
+        method: 'DELETE',
+      });
+
+      const result = await response.json();
+      alert(result.message);
+      fetchTasks();  // Refresh task list
+    }
+
+    // Reset the form
+    document.getElementById('resetTaskForm').addEventListener('click', function() {
+      document.getElementById('taskForm').reset();
+    });
+
+    // Initial fetch of tasks
+    fetchTasks();
+  </script>
+
+</body>
+</html>

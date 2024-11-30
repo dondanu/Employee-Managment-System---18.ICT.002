@@ -1,0 +1,104 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#F5F5F5">
+
+    <!-- Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Employee"
+        android:textSize="24sp"
+        android:textColor="#6200EE"
+        android:layout_gravity="center"
+        android:paddingBottom="16dp"
+        android:textStyle="bold" />
+
+    <!-- Employee ID field -->
+    <EditText
+        android:id="@+id/etEmployeeID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Employee ID"
+        android:inputType="text"
+        android:padding="12dp"
+        android:textColor="#000000"
+        android:background="@drawable/edit_text_background"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Name field -->
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:inputType="text"
+        android:padding="12dp"
+        android:textColor="#000000"
+        android:background="@drawable/edit_text_background"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Designation field -->
+    <EditText
+        android:id="@+id/etDesignation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Designation"
+        android:inputType="text"
+        android:padding="12dp"
+        android:textColor="#000000"
+        android:background="@drawable/edit_text_background"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Salary field -->
+    <EditText
+        android:id="@+id/etSalary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Salary"
+        android:inputType="numberDecimal"
+        android:padding="12dp"
+        android:textColor="#000000"
+        android:background="@drawable/edit_text_background"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Join Date field -->
+    <EditText
+        android:id="@+id/etJoinDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Join Date (YYYY-MM-DD)"
+        android:inputType="date"
+        android:padding="12dp"
+        android:textColor="#000000"
+        android:background="@drawable/edit_text_background"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Contact field -->
+    <EditText
+        android:id="@+id/etContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contact Number"
+        android:inputType="phone"
+        android:padding="12dp"
+        android:textColor="#000000"
+        android:background="@drawable/edit_text_background"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Submit Button -->
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Employee"
+        android:layout_gravity="center"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#6200EE"
+        android:layout_marginTop="20dp"
+        android:padding="12dp"
+        android:textSize="16sp" />
+
+</LinearLayout>

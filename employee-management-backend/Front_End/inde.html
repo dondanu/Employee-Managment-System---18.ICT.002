@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+        }
+        h2 {
+            text-decoration: underline;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Employee Management System</h1>
+
+    <h2>Tasks</h2>
+    <table id="taskTable">
+        <thead>
+            <tr>
+                <th>Task Name</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <h2>Attendances</h2>
+    <table id="attendanceTable">
+        <thead>
+            <tr>
+                <th>Employee Name</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <h2>Leaves</h2>
+    <table id="leaveTable">
+        <thead>
+            <tr>
+                <th>Employee Name</th>
+                <th>Leave Type</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
+    <script>
+        // API calls to fetch data
+        function fetchTasks() {
+            axios.get('http://localhost:5000/api/tasks')  // Correct endpoint for tasks
+                .then(response => {
+                    const tasks = response.data;
+                    let taskRows = '';
+                    tasks.forEach(task => {
+                        taskRows += `<tr><td>${task.taskName}</td><td>${task.status}</td></tr>`;
+                    });
+                    document.querySelector('#taskTable tbody').innerHTML = taskRows;
+                })
+                .catch(error => {
+                    console.error('Error fetching tasks:', error);
+                });
+        }
+
+        function fetchAttendances() {
+            axios.get('http://localhost:5000/api/attendances')  // Correct endpoint for attendances
+                .then(response => {
+                    const attendances = response.data;
+                    let attendanceRows = '';
+                    attendances.forEach(attendance => {
+                        attendanceRows += `<tr><td>${attendance.employeeId.name}</td><td>${attendance.status}</td></tr>`;
+                    });
+                    document.querySelector('#attendanceTable tbody').innerHTML = attendanceRows;
+                })
+                .catch(error => {
+                    console.error('Error fetching attendances:', error);
+                });
+        }
+
+        function fetchLeaves() {
+            axios.get('http://localhost:5000/api/leavemanagements')  // Correct endpoint for leaves
+                .then(response => {
+                    const leaves = response.data;
+                    let leaveRows = '';
+                    leaves.forEach(leave => {
+                        leaveRows += `<tr><td>${leave.employeeId.name}</td><td>${leave.leaveType}</td><td>${leave.status}</td></tr>`;
+                    });
+                    document.querySelector('#leaveTable tbody').innerHTML = leaveRows;
+                })
+                .catch(error => {
+                    console.error('Error fetching leaves:', error);
+                });
+        }
+
+        // Fetch data on page load
+        window.onload = function() {
+            fetchTasks();
+            fetchAttendances();
+            fetchLeaves();
+        };
+    </script>
+
+</body>
+</html>

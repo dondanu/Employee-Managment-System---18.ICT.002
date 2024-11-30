@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Management</title>
+
+  <!-- Google Fonts for beautiful fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Pacifico&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif; /* Default body font */
+      background-image: url('../img/he1.gif');
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      margin: 40px;
+      padding: 40px;
+    }
+
+
+    h1 {
+  font-family: 'Pacifico', cursive;
+  text-align: center;
+  background-color: rgba(236, 4, 159, 0.7); /* Red background with transparency */
+  padding: 20px 50px; /* Adjust padding to make the background shape round/oval */
+  margin: 0;
+  font-size: 48px;
+  font-weight: 500;
+  border-radius: 50px; /* Rounds the background, making it oval-like */
+  display: inline-block; /* This keeps the background around the text */
+  position: relative; /* Allow absolute positioning inside the container */
+  top: 50%; /* Centers vertically */
+  left: 50%; /* Centers horizontally */
+  transform: translate(-50%, -50%); /* Adjusts the positioning to truly center it */
+}
+
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      font-size: 36px;
+      font-weight: 700;
+      margin: 20px 0;
+      color: #f0f0f0;
+    }
+
+    .buttons-container {
+      text-align: center;
+      margin: 20px;
+    }
+
+    button {
+      font-family: 'Roboto', sans-serif;
+      font-size: 18px;
+      padding: 15px 30px;
+      margin: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .form-container, .employee-list-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 25px;
+  background: rgba(0, 0, 0, 0.6);
+  background-image: url('../img/he3.gif'); /* './' என்பது project folder-ஐ குறிக்கிறது */
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+}
+
+
+    label {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+
+    input, select {
+      background-color: #fff;
+      color: #000;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+
+    .employee-list-container ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .employee-list-container li {
+      background-color: rgba(255, 255, 255, 0.2);
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-family: 'Roboto', sans-serif;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .employee-list-container li:hover {
+  transform: translateY(-5px);
+  background-color: #2fc7e2; /* Dark blue */
+}
+
+    .employee-list-container li strong {
+      color: #ffdd57; /* Highlight the labels with a bright color */
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .reset-btn {
+      background-color: #28a745;
+      transition: background-color 0.3s ease;
+    }
+
+    .reset-btn:hover {
+      background-color: #218838;
+    }
+
+  </style>
+
+  <script>
+    // Utility function to display validation errors
+    function showError(field, message) {
+      const errorElement = document.getElementById(`${field}-error`);
+      errorElement.textContent = message;
+    }
+
+    // Clear all validation errors
+    function clearErrors() {
+      document.querySelectorAll('.error').forEach(error => error.textContent = '');
+    }
+
+    // Validate form fields
+    function validateFields(fields) {
+      clearErrors();
+      let isValid = true;
+
+      fields.forEach(({ id, name, required }) => {
+        const value = document.getElementById(id).value.trim();
+        if (required && !value) {
+          showError(id, `${name} is required`);
+          isValid = false;
+        }
+      });
+
+      return isValid;
+    }
+
+    // Fetch Employees from the API
+    function getEmployees() {
+      fetch('http://localhost:5000/api/employees')
+        .then(response => response.json())
+        .then(data => {
+          const employeesList = document.getElementById('employees-list');
+          employeesList.innerHTML = '';  // Clear the existing list
+          data.forEach(employee => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+              <strong>Employee ID:</strong> ${employee.EmployeeID}<br>
+              <strong>Name:</strong> ${employee.Name}<br>
+              <strong>Designation:</strong> ${employee.Designation}<br>
+              <strong>Salary:</strong> ${employee.Salary}<br>
+              <strong>Join Date:</strong> ${employee.JoinDate}<br>
+              <strong>Contact:</strong> ${employee.Contact}<br>
+            `;
+            employeesList.appendChild(li);
+          });
+        })
+        .catch(error => console.error('Error fetching employees:', error));
+    }
+
+    // Add a new employee
+    function addEmployee() {
+      const fields = [
+        { id: 'employee-id', name: 'Employee ID', required: true },
+        { id: 'name', name: 'Name', required: true },
+        { id: 'designation', name: 'Designation', required: true },
+        { id: 'salary', name: 'Salary', required: true },
+        { id: 'join-date', name: 'Join Date', required: true },
+        { id: 'contact', name: 'Contact', required: true }
+      ];
+
+      if (!validateFields(fields)) return;
+
+      const newEmployee = {
+        EmployeeID: document.getElementById('employee-id').value,
+        Name: document.getElementById('name').value,
+        Designation: document.getElementById('designation').value,
+        Salary: document.getElementById('salary').value,
+        JoinDate: document.getElementById('join-date').value,
+        Contact: document.getElementById('contact').value
+      };
+
+      fetch('http://localhost:5000/api/employees', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newEmployee)
+      })
+        .then(response => response.json())
+        .then(() => {
+          alert('Employee added successfully!');
+          getEmployees(); // Refresh the list
+          document.getElementById('add-employee-form').reset(); // Reset the form
+        })
+        .catch(error => console.error('Error adding employee:', error));
+    }
+
+    // Update Employee
+    function updateEmployee() {
+  const employeeID = document.getElementById('update-employee-id').value.trim(); // Get Employee ID
+  console.log('Employee ID:', employeeID); // Debugging
+
+  const updatedEmployee = {
+    Name: document.getElementById('update-name').value.trim(),
+    Designation: document.getElementById('update-designation').value.trim(),
+    Salary: document.getElementById('update-salary').value.trim(),
+    JoinDate: document.getElementById('update-join-date').value.trim(),
+    Contact: document.getElementById('update-contact').value.trim(),
+  };
+
+  // Remove empty fields before sending to backend
+  Object.keys(updatedEmployee).forEach((key) => {
+    if (!updatedEmployee[key]) {
+      delete updatedEmployee[key];
+    }
+  });
+
+  console.log('Filtered Update Data:', updatedEmployee); // Debugging
+
+  if (!employeeID) {
+    alert('Please enter a valid Employee ID.');
+    return;
+  }
+
+  if (Object.keys(updatedEmployee).length === 0) {
+    alert('Please fill at least one field to update.');
+    return;
+  }
+
+  // API Call for Updating Employee
+  fetch(`http://localhost:5000/api/employees/${employeeID}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updatedEmployee),
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Failed to update employee');
+      }
+    })
+    .then(() => {
+      alert('Employee updated successfully!');
+      getEmployees(); // Refresh employee list
+      document.getElementById('update-employee-form').reset(); // Reset form
+    })
+    .catch((error) => {
+      console.error('Error updating employee:', error);
+      alert('Error updating employee. Please check the console for more details.');
+    });
+}
+
+
+
+// Delete Employee
+function deleteEmployee() {
+  const employeeID = document.getElementById('delete-employee-id').value;
+
+  console.log('Employee ID to delete:', employeeID); // Log the employee ID being deleted
+
+  fetch(`http://localhost:5000/api/employees/${employeeID}`, {
+    method: 'DELETE'
+  })
+    .then(response => response.json())
+    .then(() => {
+      alert('Employee deleted successfully!');
+      getEmployees(); // Refresh employee list
+      document.getElementById('delete-employee-form').reset(); // Reset form
+    })
+    .catch(error => {
+      console.error('Error deleting employee:', error);
+    });
+}
+
+
+    // Show the corresponding employee form based on the button clicked
+    function showForm(formType) {
+    // 1. Hide all forms initially
+    document.getElementById('add-employee-form').classList.add('hidden');
+    document.getElementById('update-employee-form').classList.add('hidden');
+    document.getElementById('delete-employee-form').classList.add('hidden');
+    document.getElementById('employee-list-section').classList.add('hidden');
+    
+    // 2. Show the selected form
+    if (formType === 'add') {
+      document.getElementById('add-employee-form').classList.remove('hidden');
+    } else if (formType === 'update') {
+      document.getElementById('update-employee-form').classList.remove('hidden');
+    } else if (formType === 'delete') {
+      document.getElementById('delete-employee-form').classList.remove('hidden');
+    } else if (formType === 'list') {
+      document.getElementById('employee-list-section').classList.remove('hidden');
+      getEmployees(); // Load the list of employees
+    }
+  }
+
+    // Load the employee list when the page is loaded
+    window.onload = function() {
+      getEmployees();
+    };
+  </script>
+</head>
+<body>
+  <h1>Add, View, Update, Delete of Employee</h1>
+
+  <div class="buttons-container">
+    <button onclick="showForm('add')">Add Employee</button>
+    <button onclick="showForm('update')">Update Employee</button>
+    <button onclick="showForm('delete')">Delete Employee</button>
+    <button onclick="showForm('list')">Employee List</button>
+  </div>
+
+  <div id="employee-forms" class="form-container">
+    <!-- Add Employee Form -->
+    <form id="add-employee-form" class="hidden" onsubmit="event.preventDefault(); addEmployee();">
+      <h2>Add New Employee</h2>
+      <label for="employee-id">Employee ID</label>
+      <input type="text" id="employee-id" placeholder="Enter Employee ID" required>
+      <div id="employee-id-error" class="error"></div>
+
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="Enter Employee Name" required>
+      <div id="name-error" class="error"></div>
+
+      <label for="designation">Designation</label>
+      <input type="text" id="designation" placeholder="Enter Employee Designation" required>
+      <div id="designation-error" class="error"></div>
+
+      <label for="salary">Salary</label>
+      <input type="text" id="salary" placeholder="Enter Employee Salary" required>
+      <div id="salary-error" class="error"></div>
+
+      <label for="join-date">Join Date</label>
+      <input type="date" id="join-date" required>
+      <div id="join-date-error" class="error"></div>
+
+      <label for="contact">Contact</label>
+      <input type="text" id="contact" placeholder="Enter Contact Number" required>
+      <div id="contact-error" class="error"></div>
+
+      <button type="submit">Add Employee</button>
+    </form>
+
+    <form id="update-employee-form" class="hidden" onsubmit="event.preventDefault(); updateEmployee();">
+      <h2>Update Employee</h2>
+      <label for="update-employee-id">Employee ID</label>
+      <input type="text" id="update-employee-id" placeholder="Enter Employee ID" required>
+      <label for="update-name">Name</label>
+      <input type="text" id="update-name" placeholder="Enter Employee Name">
+      <label for="update-designation">Designation</label>
+      <input type="text" id="update-designation" placeholder="Enter Employee Designation">
+      <label for="update-salary">Salary</label>
+      <input type="text" id="update-salary" placeholder="Enter Employee Salary">
+      <label for="update-join-date">Join Date</label>
+      <input type="date" id="update-join-date">
+      <label for="update-contact">Contact</label>
+      <input type="text" id="update-contact" placeholder="Enter Contact Number">
+      <button type="submit">Update Employee</button>
+    </form>
+    
+
+<!-- Delete Employee Form -->
+<form id="delete-employee-form" class="hidden" onsubmit="event.preventDefault(); deleteEmployee();">
+  <h2>Delete Employee</h2>
+  <label for="delete-employee-id">Employee ID</label>
+  <input type="text" id="delete-employee-id" placeholder="Enter Employee ID to Delete">
+  <div id="delete-employee-id-error" class="error"></div>
+
+  <button type="submit" class="reset-btn">Delete Employee</button>
+</form>
+
+    
+  </div>
+
+  <!-- Employee List Section -->
+  <div id="employee-list-section" class="employee-list-container hidden">
+    <h2>Employee List</h2>
+    <ul id="employees-list">
+      <!-- Employee list will be dynamically inserted here -->
+    </ul>
+  </div>
+
+</body>
+</html>

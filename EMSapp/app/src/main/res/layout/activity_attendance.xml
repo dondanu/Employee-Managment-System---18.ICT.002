@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#3BFCFF"> <!-- Yellow background for a bright look -->
+
+    <Button
+        android:id="@+id/btnBackToHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back to Home"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#FF5722" /> <!-- Attractive back button -->
+
+    <EditText
+        android:id="@+id/edtEmployeeId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Employee ID"
+        android:inputType="text"
+        android:textSize="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="#FFCDD2" />
+
+    <EditText
+        android:id="@+id/edtDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Date (YYYY-MM-DD)"
+        android:inputType="date"
+        android:textSize="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="#FFCDD2" />
+
+    <EditText
+        android:id="@+id/edtCheckIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Check In"
+        android:textSize="20dp"
+        android:layout_marginBottom="20dp"
+        android:inputType="time"
+        android:background="#FFCDD2" />
+
+    <EditText
+        android:id="@+id/edtCheckOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Check Out"
+        android:inputType="time"
+        android:textSize="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="#FFCDD2" />
+
+    <EditText
+        android:id="@+id/edtStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Status"
+        android:inputType="text"
+        android:textSize="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="#FFCDD2" />
+
+    <Button
+        android:id="@+id/btnAddAttendance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Attendance"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#4CAF50" /> <!-- Green background -->
+
+    <Button
+        android:id="@+id/btnAttendanceRecords"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Attendance Records"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#2196F3" /> <!-- Blue button for records -->
+</LinearLayout>

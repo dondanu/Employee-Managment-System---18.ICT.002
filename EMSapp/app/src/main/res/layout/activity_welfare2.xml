@@ -1,0 +1,29 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="#E8EAF6">
+
+    <TextView
+        android:id="@+id/tv_benefits"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Benefits Records"
+        android:textSize="18sp"
+        android:padding="10dp"
+        android:background="#FFFFFF"
+        android:textColor="#000000" />
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:background="#FF5722"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center" />
+
+</LinearLayout>

@@ -1,0 +1,68 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FAFAFA">
+
+    <!-- Add Salary Form -->
+    <EditText
+        android:id="@+id/et_employee_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Employee ID"
+        android:inputType="text"
+        android:layout_marginBottom="10dp" />
+
+    <EditText
+        android:id="@+id/et_base_salary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Base Salary"
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="10dp" />
+
+    <EditText
+        android:id="@+id/et_bonuses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Bonuses"
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="10dp" />
+
+    <EditText
+        android:id="@+id/et_deductions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Deductions"
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        android:id="@+id/btn_add_salary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Salary"
+        android:backgroundTint="#4CAF50"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        android:id="@+id/btn_view_salaries"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Salaries"
+        android:backgroundTint="#2196F3"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        android:id="@+id/btn_back_to_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back to Home"
+        android:backgroundTint="#F44336"
+        android:textColor="#FFFFFF" />
+
+</LinearLayout>
