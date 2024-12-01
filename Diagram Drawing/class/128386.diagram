@@ -1,0 +1,88 @@
+format 224
+
+activitynodecanvas 128002 activitynode_ref 128130 // initial_node
+  xyz 275 24 2000
+end
+activityobjectcanvas 128130 activityobject_ref 128130 // activity object Employee Login
+  
+  xyzwh 239 88 2000 91 31
+end
+activityobjectcanvas 128258 activityobject_ref 128258 // activity object Record Time In
+  
+  xyzwh 245 164 2000 87 31
+end
+activitynodecanvas 128386 activitynode_ref 128258 // decision
+  xyz 275 242 2000
+end
+activityobjectcanvas 128514 activityobject_ref 128386 // activity object Record Time Out
+  
+  xyzwh 154 322 2000 97 31
+end
+activityobjectcanvas 128642 activityobject_ref 128514 // activity object Calculate Working Hours
+  
+  xyzwh 133 408 2000 135 31
+end
+activityobjectcanvas 128770 activityobject_ref 128642 // activity object Continue Work
+  
+  xyzwh 354 369 2000 87 31
+end
+activitynodecanvas 128898 activitynode_ref 128386 // merge
+  xyz 286 478 2000
+end
+activitynodecanvas 129026 activitynode_ref 128514 // activity_final
+  xyz 289 550 2000
+end
+textcanvas 130306 "Is Loging Out"
+  xyzwh 209 249 2006 63 14
+textcanvas 130434 "Yes"
+  xyzwh 228 279 2006 30 22
+textcanvas 130562 "No
+"
+  xyzwh 323 273 2006 24 32
+flowcanvas 129154 flow_ref 128130 // <flow>
+  
+  from ref 128002 z 2001 to ref 128130
+   write_horizontally default
+end
+flowcanvas 129282 flow_ref 128258 // <flow>
+  decenter_end 458
+  
+  from ref 128130 z 2001 to ref 128258
+   write_horizontally default
+end
+flowcanvas 129410 flow_ref 128386 // <flow>
+  
+  from ref 128258 z 2001 to ref 128386
+   write_horizontally default
+end
+flowcanvas 129538 flow_ref 128514 // <flow>
+  
+  from ref 128386 z 2001 to ref 128514
+   write_horizontally default
+end
+flowcanvas 129666 flow_ref 128642 // <flow>
+  
+  from ref 128386 z 2001 to ref 128770
+   write_horizontally default
+end
+flowcanvas 129794 flow_ref 128770 // <flow>
+  
+  from ref 128514 z 2001 to ref 128642
+   write_horizontally default
+end
+flowcanvas 129922 flow_ref 128898 // <flow>
+  
+  from ref 128642 z 2001 to ref 128898
+   write_horizontally default
+end
+flowcanvas 130050 flow_ref 129026 // <flow>
+  
+  from ref 128770 z 2001 to ref 128898
+   write_horizontally default
+end
+flowcanvas 130178 flow_ref 129154 // <flow>
+  
+  from ref 128898 z 2001 to ref 129026
+   write_horizontally default
+end
+end

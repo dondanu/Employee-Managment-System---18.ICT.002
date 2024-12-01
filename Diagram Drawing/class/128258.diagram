@@ -1,0 +1,43 @@
+format 224
+
+classcanvas 128002 class_ref 128642 // Employee
+  simpleclassdiagramsettings end
+  xyz 143 156 2000
+end
+classcanvas 128130 class_ref 128770 // HRandAdmin
+  simpleclassdiagramsettings end
+  xyz 124 363 2000
+end
+subject 128258 ""
+  xyzwh 344 45 2000 244 510
+usecasecanvas 128386 usecase_ref 128130 // Track Attendence
+  xyzwh 439 73 3005 64 32 label_xy 429 105
+end
+usecasecanvas 128514 usecase_ref 128258 // Apply for Leave
+  xyzwh 441 158 3005 64 32 label_xy 434 189
+end
+usecasecanvas 128642 usecase_ref 128386 // Reguest Training
+  xyzwh 438 236 3005 64 32 label_xy 430 268
+end
+usecasecanvas 128770 usecase_ref 128514 // Manage Employee Database
+  xyzwh 432 305 3005 64 32 label_xy 396 337
+end
+usecasecanvas 128898 usecase_ref 128642 // Calculate Salary
+  xyzwh 437 384 3005 64 32 label_xy 430 416
+end
+usecasecanvas 129026 usecase_ref 128770 // Manage Walfare Service
+  xyzwh 433 466 3005 64 32 label_xy 406 498
+end
+line 129154 ----
+  from ref 128002 z 3006 to ref 128386
+line 129282 ----
+  from ref 128002 z 3006 to ref 128514
+line 129410 ----
+  from ref 128002 z 3006 to ref 128642
+line 129538 ----
+  from ref 128130 z 3006 to ref 128770
+line 129666 ----
+  from ref 128130 z 3006 to ref 128898
+line 129794 ----
+  from ref 128130 z 3006 to ref 129026
+end

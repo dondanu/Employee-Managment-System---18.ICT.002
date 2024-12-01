@@ -1,0 +1,127 @@
+format 224
+"Slasses" // Slasses
+  revision 1
+  modified_by 2 "hp"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  usecaseview 128258 "activity"
+    
+    usecasediagramsettings end
+    
+    sequencediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    activitydiagramsettings
+     end
+    activity 128130 "activity"
+      activitydiagram 128386 "activity"
+	activitydiagramsettings
+	 end
+	size A4
+      end
+
+      activitynode 128130 initial_node ""
+	flow 128130 "<flow>"
+	  on activityobject_ref 128130 // activity object Employee Login
+	end
+      end
+
+      activityobject 128130 "Employee Login"
+	 explicit_type ""
+	unordered 
+	flow 128258 "<flow>"
+	  on activityobject_ref 128258 // activity object Record Time In
+	end
+      end
+
+      activityobject 128258 "Record Time In"
+	 explicit_type ""
+	unordered 
+	flow 128386 "<flow>"
+	  on activitynode_ref 128258 // decision
+	end
+      end
+
+      activitynode 128258 decision ""
+	flow 128514 "<flow>"
+	  on activityobject_ref 128386 // activity object Record Time Out
+	end
+
+	flow 128642 "<flow>"
+	  on activityobject_ref 128642 // activity object Continue Work
+	end
+      end
+
+      activityobject 128386 "Record Time Out"
+	 explicit_type ""
+	unordered 
+	flow 128770 "<flow>"
+	  on activityobject_ref 128514 // activity object Calculate Working Hours
+	end
+      end
+
+      activityobject 128514 "Calculate Working Hours"
+	 explicit_type ""
+	unordered 
+	flow 128898 "<flow>"
+	  on activitynode_ref 128386 // merge
+	end
+      end
+
+      activityobject 128642 "Continue Work"
+	 explicit_type ""
+	unordered 
+	flow 129026 "<flow>"
+	  on activitynode_ref 128386 // merge
+	end
+      end
+
+      activitynode 128386 merge ""
+	flow 129154 "<flow>"
+	  on activitynode_ref 128514 // activity_final
+	end
+      end
+
+      activitynode 128514 activity_final ""
+      end
+    end
+  end
+end
